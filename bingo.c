@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-
+#include <time.h>
 
 #define DRAW_MAX 50
 
@@ -170,12 +169,12 @@ Card *Card_New() {
 }
 
 
-void Card_Free(void *c) {
-	free(c);
+void Card_Free(void *card) {
+	free(card);
 }
 
 
-int Card_Print(Card *card) {
+void Card_Print(Card *card) {
 	int i,j,k;
 	printf("%s\n","   B    I    N    G    O   ");
 	for(j=0;j<5;j++) {
@@ -216,7 +215,7 @@ int main(void) {
 
 	int w;
 
-	clrscr();
+
 
 	srand(time(NULL));
 
@@ -266,12 +265,11 @@ int main(void) {
 		printf("You Lose!");
 	}
 
-	getchar();
-
-	Card_Free(cards);
+	for(i=0;i<CARD_MAX;i++) {
+		Card_Free(cards[i]);
+	}
 
 	return 0;
 }
 
 
-
